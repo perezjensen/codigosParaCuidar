@@ -4,7 +4,7 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.ver_perfil, name='perfil'),
+    path('perfil/<id>', views.ver_perfil, name='perfil'),
    
 ]
 
