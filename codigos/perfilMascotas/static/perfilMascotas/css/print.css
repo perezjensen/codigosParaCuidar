@@ -1,0 +1,78 @@
+
+:root {
+    --color-desing-primary: #0089E4;
+    --color-desing-secondary: #1FBA8E;
+    
+  }
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+
+
+
+.diseño-codigo{
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    width: 4cm;
+    height: 6cm;
+    background-color: var(--color-desing-primary);
+    border: solid 0.1mm white;
+   
+  }
+  
+  .header-codigo-desing{
+    background-color: #0681d3;
+    font-size: 4mm;
+  
+  }
+  
+  
+  
+  
+  .lineas-info h4{
+    font-size: 2mm;
+    margin-top: -7px;
+  }
+  .doble-aviso{
+    margin-top: -7px;
+    background-color: var(--color-desing-secondary);
+    border-bottom: 2px solid white; /* tamaño y color de las rayas */
+    border-bottom-style: dashed; /* estilo de las rayas */
+    border-bottom-width: 1mm; /* tamaño de las rayas */
+    border-spacing: 2px; /* tamaño del espacio entre rayas */
+    
+  }
+  .doble-aviso h1{
+  font-size: 5mm;
+  }
+  
+  .imagenes-Marcas {
+    margin-top: 1mm;
+    text-align: center;
+   
+  }
+  .imagen-centrada{
+    margin: 1mm;
+    width: 19mm;
+    height: 19mm;
+    border-radius: 1mm;
+    margin: 0 auto;
+    display: inline;
+  }
+  
+  .pie{
+    margin-top: 1mm;
+    background-color: var(--color-desing-secondary);
+    border-top: 1mm solid white;
+  }
+  .pie h1{
+    font-size: 5mm;
+    margin-top: -0.7mm;
+  }
+  .pie h2{
+    font-size: 3.6mm;
+    margin-top: -3mm;
+  }
+  .container-principal{
+    display: flex!important; 
+    flex-wrap: wrap!important; 
+    flex-direction: row!important;
+  }

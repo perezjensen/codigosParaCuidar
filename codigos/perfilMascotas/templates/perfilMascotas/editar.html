@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'perfilMascotas/images/icono.ico' %}">
+</head>
+
+<body>
+    <section class="hero is-primary is-fullheight">
+        <!-- Hero head: will stick at the top -->
+ 
+    {% if messages %}           
+        {% for message in messages %}
+            <div class="notification is-danger is-light is-rounded">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+        <!-- Hero content: will be in the middle -->
+        <div class="hero-body">
+            
+
+
+          <div class="container has-text-centered">
+            <p class="title">
+                Edita mi información escribiendo tu nombre
+                solo si eres mi dueño
+              </p>
+            <form action="{% url 'verificarNombre'  %}" method="POST">
+                {% csrf_token %}
+              
+
+
+
+              
+    <div class="columns is-mobile is-multiline">
+      <div class="column is-12">
+          <div class="container">
+              <div class="field">
+                  <label class="label has-text-white">Tu Nombre</label>
+                  <div class="control has-icons-left has-icons-right">
+                      <input name="nombre" class="input is-primary is-large is-rounded" type="text" placeholder="Tu Nombre">
+                      <span class="icon is-medium is-left">
+                      <i class="fas fa-user has-text-primary"></i>
+                      </span>
+                      <span class="icon is-medium is-right">
+                      <i class="fas fa-check "></i>
+                      </span>
+                  </div>
+
+                  {% if form.nombreDueno.errors %}
+                      <div class="notification is-danger is-light is-rounded">
+                          {% for error in form.nombreDueno.errors %}
+                          {{ error }}
+                      {% endfor %}
+                      </div>
+                  {% endif %}
+
+              
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <button type="submit" class=" column is-12 button  is-info is-large is-fullwidth is-focused is-rounded">
+          <span class="icon is-small">
+            <i class="fas fa-edit"></i>
+          </span>
+          <span>Editar</span>
+        </button>
+
+    
+  </div>
+            </form>
+            <p class="subtitle">
+                 
+            {% if messages %}           
+            {% for message in messages %}
+              
+                    {{ message }}
+               
+            {% endfor %}
+        {% else %}
+        Escribe el Nombre con el que registraste tu Mascota
+        {% endif %}
+              
+            </p>
+          </div>
+        </div>
+      
+        <!-- Hero footer: will stick at the bottom -->
+
+      </section>
+</body>
+
+</html>

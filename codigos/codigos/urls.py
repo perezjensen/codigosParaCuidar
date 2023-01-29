@@ -19,8 +19,23 @@ from django.urls import path, include
 from perfilMascotas import urls
 from adminCodigos import urls
 
+from django.conf import settings # se utiliza para la carga de imagen 
+from django.conf.urls.static import static # se utiliza para la carga de imagen
+
+from django.contrib import messages
+
+
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('perfilMascotas.urls')),
     path('', include('adminCodigos.urls')),
+    path('', include('web.urls')),
+    
 ]
+
+
+#añadimos a las url las url para buscar las imagenes 
+urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT )
+

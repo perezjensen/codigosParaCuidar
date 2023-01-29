@@ -1,6 +1,588 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static  %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <!--boostrap-->
+    <link rel="stylesheet" href="{% static 'perfilMascotas/css/bootstrap.min.css' %} ">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'perfilMascotas/images/icono.ico' %}">
+    <!--modificacionesTemplate-->
+    <link rel="stylesheet" href="{% static 'perfilMascotas/css/desing.css' %} ">
+    <link rel="stylesheet" href="{% static 'perfilMascotas/css/redes.css' %} ">
+    <link rel="stylesheet" href="{% static 'perfilMascotas/css/newdesing.css' %} ">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
 <body>
-    <p>Hi there!</p>
-    <p>It works!</p>
+
+
+  {% load humanize %} 
+
+  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+
+    
+    <h4 style="margin-top:8px;margin-left:10px;" class=" has-text-white">{{datos.cliente.nombreNegocio}} </h4>
+    </div>
+
+    <a href="{% url 'editar' %}" style="margin-right:10px;" class="button is-small is-rounded is-success  is-inverted is-focused">
+        <span class="icon">
+          <i class="fas fa-edit"></i>
+        </span>
+        <span>Editar</span>
+    </a>
+    
+
+    
+
+</nav>
+<div class="linea"></div>
+
+
+<div class="imagencontenido">
+  {% if datos.imagenPerfil %}
+  <img src="{{ datos.imagenPerfil.url}}" class="imgPerfil img-fluid" alt="{{datos.nombreMascota}}">
+{% else %}
+  <img src="{% static 'perfilMascotas/images/perro.jpg' %} " class="imgPerfil img-fluid" alt="Sin Foto">
+{% endif %}
+
+
+</div>
+
+
+
+
+
+<div class="contenido container-fluid">
+<br>
+<h1 class="title has-text-primary">Hola, Soy {{datos.nombreMascota}} </h1>
+<h2 class="subtitle">Gracias Por Encontrarme</h2>
+
+<div class="content">
+    Mi hogar es muy importante para mí y 
+    me asusta estar fuera de el. Por favor,
+    ayúdame a volver a casa 
+</div>
+
+
+{% if datos.recompensa  %}
+
+
+<section class="hero is-danger">
+  <div class="hero-body">
+    <p class="title">
+      Recompesa de {{datos.recompensa|intcomma}} 
+    </p>
+    <p class="subtitle">
+      Me gustaría pedirte que me lleves a casa con mis dueños. Actualmente, ellos están ofreciendo una recompensa de {{datos.recompensa|intcomma}} por mi devolución. Si puedes ayudarme a encontrar el camino de regreso a casa, estarás haciéndome un gran favor y también ganarás algo de dinero. 
+    <p class="mb-0"> ¿Podrías comunicarte con mis dueños para coordinar mi regreso?</p>
+    </p>
+  </div>
+</section>
+    
+<br>
+{% endif %}
+
+
+
+<a target="_blank" href="https://api.whatsapp.com/send?phone={{datos.telefono}}&text=Hola, me alegro de poder contactarte. Acabo de encontrar a {{datos.nombreMascota}}. ¡Espero poder devolver a {{datos.nombreMascota}} a su hogar lo antes posible!" class="button is-focused is-primary is-large is-fullwidth is-rounded">
+    <span class="icon">
+      <i style="color:white;" class="fab fa-whatsapp"></i>
+    </span>
+    <span>Enviar Whatsapp</span>
+  </a>
+  <br>
+  <a href="tel:{{datos.telefono}}" class="button is-focused is-info is-large is-fullwidth is-rounded">
+    <span class="icon">
+      <i class="fas fa-mobile-alt"></i>
+    </span>
+    <span>Llamar al +{{datos.telefono}}</span>
+  </a>
+
+<br>
+
+
+
+
+
+<section class="hero is-primary">
+  <div class="hero-body">
+    <p class="title">
+      Datos e informacion de {{datos.nombreMascota}}
+    </p>
+
+  </div>
+</section>
+
+<div class="box">
+
+
+  <p class="panel-tabs">
+      
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Datos</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Vacunas</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Baños</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" >Desparasitantes</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="peso-tab" data-bs-toggle="tab" data-bs-target="#peso-tab-pane" type="button" role="tab" aria-controls="peso-tab-pane" aria-selected="false" >Peso</button>
+      </li>
+    </ul>
+
+  </p>
+
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+      <div class="panel-block ">
+        <span class="panel-icon">
+          <i class="fas fa-paw" aria-hidden="true"></i>
+        </span>
+        <h4><strong>Raza:</strong> 
+        {% if datos.raza %}
+        {{datos.raza}}
+        {% else %}
+        Sin Datos
+        {% endif %} </h4>
+      </div>
+      <div class="panel-block">
+        <span class="panel-icon">
+          <i class="fas fa-mars" aria-hidden="true"></i>
+        </span>
+        <h4><strong>Sexo:</strong> {% if datos.sexo %}
+          {{datos.sexo}}
+        {% else %}
+        Sin Datos
+        {% endif %}</h4>
+      </div>
+      <div class="panel-block">
+        <span class="panel-icon">
+          <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+        </span>
+        <h4><strong>Edad:</strong> {% if  datos.edad%}
+          {{datos.edad}} Años
+        {% else %}
+        Sin Datos
+        {% endif %}</h4>
+      </div>
+      <div class="panel-block">
+        <span class="panel-icon">
+          <i class="fas fa-syringe" aria-hidden="true"></i>
+        </span>
+        <h4><strong>Esterilizada/Castrado:</strong> {{datos.esterilizacion}}</h4>
+      </div>
+
+      <div class="panel-block">
+        <span class="panel-icon">
+          <i class="fas fa-sticky-note" aria-hidden="true"></i>
+        </span>
+        <h4><strong>Observaciones:</strong> {% if datos.observaciones %}
+          {{datos.observaciones}}
+        {% else %}
+        Sin Datos
+        {% endif %} </h4>
+      </div>
+      
+
+    </div>
+    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+      {% if vacunasMostrar %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Vacuna</th>
+            <th scope="col">Dosis</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for vacuna in vacunasMostrar  %}
+          <tr>
+            <td >{{vacuna.fecha|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>{{vacuna.vacuna}}</td>
+            <td >{{vacuna.dosis}}</td>
+
+
+          </tr>
+          {% endfor %}
+
+
+        </tbody>
+      </table>
+      {% else %}
+          <div class="alert alert-info" role="alert">
+          <p>Aún no hay vacunas registradas para tu mascota. Para agregar vacunas, necesitas ingresar al apartado de "editar información" y escribir tu nombre como dueño de la mascota. Luego, presiona el botón "editar" para comenzar a agregar vacunas.</p>
+        </div>
+      {% endif %}
+    </div>
+    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+      
+      {% if banosMostrar %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Descripcion</th>
+    
+
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for bano in banosMostrar  %}
+          <tr>
+            <td >{{bano.fecha|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>{{bano.descripcion}}</td>
+  
+
+
+          </tr>
+          {% endfor %}
+
+
+        </tbody>
+      </table>
+      {% else %}
+          <div class="alert alert-info" role="alert">
+          <p>Aún no hay datos de baños registradas para tu mascota. Para agregar registros, necesitas ingresar al apartado de "editar información" y escribir tu nombre como dueño de la mascota. Luego, presiona el botón "editar" para comenzar a agregar nuevos registros.</p>
+        </div>
+      {% endif %}
+    
+    </div>
+    <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
+      {% if desparasitanteMostrar %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Antiparasitario</th>
+            <th scope="col">Dosis</th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for desparasitante in desparasitanteMostrar  %}
+          <tr>
+            <td >{{desparasitante.fecha|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>{{desparasitante.antiparasitario}}</td>
+            <td >{{desparasitante.dosis}}</td>
+
+
+          </tr>
+          {% endfor %}
+
+
+        </tbody>
+      </table>
+      {% else %}
+          <div class="alert alert-info" role="alert">
+          <p>Aún no hay antiparasitarios registradas para tu mascota. Para agregar registros, necesitas ingresar al apartado de "editar información" y escribir tu nombre como dueño de la mascota. Luego, presiona el botón "editar" para comenzar a agregar registros.</p>
+        </div>
+      {% endif %}
+    </div>
+    <div class="tab-pane fade" id="peso-tab-pane" role="tabpanel" aria-labelledby="peso-tab" tabindex="0">
+      {% if pesoMostrar %}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Fecha</th>
+            <th scope="col">Peso</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {% for peso in pesoMostrar  %}
+          <tr>
+            <td >{{peso.fecha|date:"SHORT_DATE_FORMAT"}}</td>
+            <td>{{peso.peso}}</td>
+
+
+          </tr>
+          {% endfor %}
+
+
+        </tbody>
+      </table>
+      {% else %}
+          <div class="alert alert-info" role="alert">
+          <p>Aún no hay datos registrados para tu mascota. Para agregar registros, necesitas ingresar al apartado de "editar información" y escribir tu nombre como dueño de la mascota. Luego, presiona el botón "editar" para comenzar a agregar registros.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+
+</div>
+
+<br>
+
+
+<div class="box">
+
+
+  <article class="message is-primary">
+    <div class="message-header">
+      <p>Servicio Prestado Por: </p>
+     
+    </div>
+    <div class="message-body">
+
+      <article class="media columns is-mobile is-multiline">
+
+        <figure class="media-left image is-100x100 column is-12" style="display: flex; justify-content: center; align-items: center;">
+          <img style="max-width:150px;" class="is-rounded" src="{{datos.cliente.logo.url}}">
+</figure>
+
+
+        
+    
+    
+     
+        <div class="media-content ">
+          <div class="content">
+            <p>
+              <strong class="is-size-5">{{datos.cliente.nombreNegocio}}</strong>
+
+              <br>
+              {{datos.cliente.observaciones}}
+              nos encontramos en la ciudad de <strong>{{datos.cliente.ciudad}}</strong> <br>
+              <strong>Direccion exacta: {{datos.cliente.direccion}} </strong>
+              <br>
+              <strong>Comunicate al: {{datos.cliente.telefono}}</strong>
+            </p>
+          </div>
+          <nav class="level is-mobile">
+            <div class="level-left">
+              
+
+
+      
+              
+              <p class="buttons">
+                <a target="_blank" href="https://api.whatsapp.com/send?phone={{datos.cliente.telefono}}&text=" class="button is-success is-focused">
+                  <span class="icon">
+                    <i style="color:white;" class="fab fa-whatsapp"></i>
+                  </span>
+                  <span> Whatsapp</span>
+                </a>
+
+                
+                {% if datos.cliente.facebook  %}
+                  <a  href="https://www.facebook.com/{{datos.cliente.facebook}}" target="_blank" class="button is-link is-focused">
+                    <span class="icon">
+                      <i class="fab fa-facebook-square"></i>
+                    </span>
+                    <span>Facebook</span>
+                  </a>
+                {% endif %}
+
+                {% if datos.cliente.tictok  %}
+                  <a  href="https://www.tiktok.com/{{datos.cliente.tictok}}" target="_blank" class="button is-focused">
+                    <span class="icon is-small">
+                      <i class="fab fa-tiktok"></i>
+                    </span>
+                    <span>Tiktok</span>
+                  </a>
+                {% endif %}
+
+                {% if datos.cliente.instagram %}
+                  <a href="https://www.instagram.com/{{datos.cliente.instagram}}" target="_blank"class="button is-danger is-focused">
+                    <span class="icon is-small">
+                      <i style="color:white;" class="fab fa-instagram"></i>
+                    </span>
+                    <span>Instagram</span>
+                  </a>
+                {% endif %}
+
+   
+              </p>
+   
+
+
+            </div>
+          </nav>
+        </div>
+
+      </article>
+
+
+
+
+     
+    </div>
+  </article>
+
+
+
+
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      Plataforma suministrada por  <strong>Codigos Para Cuidar</strong>  
+
+    </p>
+  </div>
+</footer>
+
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+      const funcionInit = () => {
+        if (!"geolocation" in navigator) {
+          return alert("Tu navegador no soporta el acceso a la ubicación. Intenta con otro");
+        }
+    
+        navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onErrorDeUbicacion);
+    };
+    
+    const onUbicacionConcedida = ubicacion => {
+        const coordenadas = ubicacion.coords;
+        const data = {
+            latitud: coordenadas.latitude,
+            longitud: coordenadas.longitude
+        };
+
+        console.log("Data: ", data);
+
+    
+        const csrf_token_list = document.getElementsByName('csrfmiddlewaretoken');
+        
+        if (csrf_token_list.length > 0) {
+          console.log("entre al crf token");
+            const csrf_token = csrf_token_list[0].value;
+            console.log("csrf_token: ", csrf_token);
+            
+            fetch("{{ url }}", {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrf_token,
+                },
+                credentials: "same-origin",
+            });
+        }
+    };
+    
+    const onErrorDeUbicacion = err => {
+        console.log("Error obteniendo ubicación: ", err);
+    };
+    
+    document.addEventListener("DOMContentLoaded", funcionInit);
+    
+    
+     </script>
+
+
 </body>
 </html>

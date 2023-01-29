@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+      {% load static  %}
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <title>Codigos Para Cuidar - Empresas</title>
+    
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <link rel="shortcut icon" type="image/x-icon" href="{% static 'perfilMascotas/images/icono.ico' %}">
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href=" {% static 'perfilMascotas/css/styles.css' %} " rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+        <style>
+          .device[data-device=iPhoneX][data-orientation=portrait][data-color=black]::after {
+            content: "";
+            background-image: url({% static 'perfilMascotas/images/portrait_black.png' %});
+          }
+          
+        </style>
+
+
+        </head>
+        
+
+
+
+
+    
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar bg-gradient-primary-to-secondary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item" >
+               
+               <img style="height: 80px;" src="{% static 'perfilMascotas/images/logo.png' %}" alt="">
+              </a>
+          
+
+            </div>
+
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="field is-grouped">
+                  <p class="control">
+                    <a class="navbar-item has-text-white" href="{% url 'personal' %}">
+                      Individual
+                    </a>
+                  </p>
+              
+                </div>
+              </div>
+            </div>
+          </div>
+          </nav>
+
+        <!-- Mashead header-->
+        <header class="masthead">
+            <div class="container px-5">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <!-- Mashead text and app badges-->
+                        <div class="mb-5 mb-lg-0 text-center text-lg-start">
+                            <h1  class="display-1 lh-1 mb-3 ">Colabora con nosotros para brindar seguridad a las mascotas</h1>
+                            <p class="lead fw-normal text-muted mb-5 ">
+                              Ofrecemos la posibilidad de comprar los Stickers para collares con códigos de identificación para mascotas personalizados con el logo de tu negocio. Además, te ofrecemos un espacio en nuestra plataforma para promocionar tu negocio y brindar tranquilidad a los dueños de mascotas
+                            </p>
+                            <div class="d-flex flex-column flex-lg-row align-items-center">
+                                
+                                <a target="_blank" class="button is-large  is-focused is-success is-fullwidth is-rounded" href="https://api.whatsapp.com/send?phone=573209606564&text=Hola,%20%C2%A1estoy%20interesado%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20compra%20al%20por%20mayor%20de%20los%20c%C3%B3digos%20QR,%20%C2%BFPodr%C3%ADa%20proporcionarme%20m%C3%A1s%20detalles%20y%20c%C3%B3mo%20puedo%20hacer%20un%20pedido?%20Gracias." >
+                                    Obtener Códigos
+                                  </a>
+
+                                  
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Masthead device mockup feature-->
+                        <div class="masthead-device-mockup">
+                            <svg class="circle" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="circleGradient" gradientTransform="rotate(45)">
+                                        <stop class="gradient-start-color" offset="0%"></stop>
+                                        <stop class="gradient-end-color" offset="100%"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <circle cx="50" cy="50" r="50"></circle></svg
+                            ><svg class="shape-1 d-none d-sm-block" viewBox="0 0 240.83 240.83" xmlns="http://www.w3.org/2000/svg">
+                            </svg
+                            ><svg class="shape-2 d-none d-sm-block" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"></circle></svg>
+                            <div class="device-wrapper">
+                                <div class="device" data-device="iPhoneX" data-orientation="portrait" data-color="black">
+                                    <div class="screen bg-black">
+                                        <!-- PUT CONTENTS HERE:-->
+                                        <!-- * * This can be a video, image, or just about anything else.-->
+                                        <!-- * * Set the max width of your media to 100% and the height to-->
+                                        <!-- * * 100% like the demo example below.-->
+                                        <video muted="muted" autoplay="" loop="" style="max-width: 100%; height: 100%"><source src="{% static 'perfilMascotas/images/apps.mp4' %}" type="video/mp4" /></video>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+
+
+
+
+          <aside class="text-center bg-gradient-primary-to-secondary">
+            <div class="container px-5">
+              <div class="row gx-5 justify-content-center">
+                <div class="col-xl-8">
+                  <div class="h2 fs-1 text-white mb-4">
+                    ¡Ofrecemos soluciones personalizadas para veterinarias!
+                  </div>
+                  <div class="text-center">
+                    <p class="text-white mb-4">Vendemos stickers con el logo de su negocio y un código QR único para identificar a las mascotas de sus clientes que se pegan a los collares. Además, su información de contacto y redes sociales estarán disponibles en nuestra plataforma para que sus clientes puedan encontrarlo fácilmente.</p>
+                    <a target="_blank" href="https://api.whatsapp.com/send?phone=573209606564&text=Hola,%20%C2%A1estoy%20interesado%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20compra%20al%20por%20mayor%20de%20los%20c%C3%B3digos%20QR,%20%C2%BFPodr%C3%ADa%20proporcionarme%20m%C3%A1s%20detalles%20y%20c%C3%B3mo%20puedo%20hacer%20un%20pedido?%20Gracias." class="button is-large  is-focused is-success is-fullwidth is-rounded">
+                        <span class="icon">
+                          <i class="fab fa-whatsapp"></i>
+                        </span>
+                        <span class="is-size-6-mobile">Contáctanos Ahora </span>
+                      </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </aside>
+          
+
+          
+
+ 
+
+
+        <section class="advantages">
+          <div class="container">
+              <div class="row">
+                  <div class="col-12 text-center">
+                      <h2 class="title">Beneficios para tu Negocio</h2>
+                      <br>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-4">
+                      <div class="card custom-color-card">
+                          <div class="card-body text-center">
+                              <i class="fas fa-tag fa-5x has-text-primary"></i>
+                              <h4 class="card-title mt-3">Venta al por mayor</h4>
+                              <p class="card-text">Ofrecemos descuentos especiales para la compra de Stickers para collares con códigos QR en grandes cantidades.</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="card custom-color-card">
+                          <div class="card-body text-center ">
+                              <i class="fas fa-paw fa-5x has-text-primary"></i>
+                              <h4 class="card-title mt-3 ">Promoción de tu negocio</h4>
+                              <p class="card-text">Incluimos tu logo en los Stickers para collares con codigos y te proporcionamos un espacio en nuestra plataforma para promocionar tus servicios y productos.</p>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="card custom-color-card">
+                          <div class="card-body text-center">
+                              <i class="fas  fa-envelope fa-5x has-text-primary"></i>
+                              <h4 class="card-title mt-3">Alerta de correo electrónico</h4>
+                              <p class="card-text">Los clientes recibirán un correo electrónico de alerta con la ubicación de su mascota cuando el codigo sea escaneado.</p>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+
+
+        <section id="testimonials" class="bg-light">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12 text-center">
+                  <h2 class="title">Testimonios</h2>
+                  <hr class="my-4">
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+
+                <div class="col-lg-12">
+                  <div class="testimonial-item">
+                    <img class="rounded-circle img-fluid" src="{% static 'perfilMascotas/images/animalia.png' %}" alt="">
+                    <h4 class=" title is-5">Animalía Ve</h4>
+                    <p class="font-weight-light mb-0">
+                      Mi Nombre es Andrea, como veterinaria, siempre busco la seguridad y bienestar de mis pacientes. Con los Stickers personalizados con el logo de mi clínica y el código QR, puedo asegurarme de que en caso de pérdida, los animales puedan ser devueltos a sus dueños de manera segura y rápida. Además, la plataforma me permite promocionar mi clínica y vender productos y servicios directamente a los clientes.
+                    </p>
+                  </div>
+                </div>
+                <p></p>
+                <hr>
+
+                <div class="col-lg-12">
+                    <div class="testimonial-item">
+                      <img class="rounded-circle img-fluid" src="{% static 'perfilMascotas/images/peluditos.png' %}" alt="">
+                      <h4 class="title is-5">Peluditos Felices</h4>
+                      <p class="font-weight-light mb-0">
+                        Somos un spa de mascotas, y decidimos regalar los codigos a nuestros clientes, debido a que salen muy economicos, asi nuestros clientes estan felices, y pueden llevar un control de los baños a sus peluditos
+                      </p>
+                    </div>
+                </div>
+                <p></p>
+                <hr>
+
+                <div class="col-lg-12">
+                    <div class="testimonial-item">
+                      <img class="rounded-circle img-fluid" src="{% static 'perfilMascotas/images/mascotas.png' %}" alt="">
+                      <h4 class="title is-5">Dra. Elena Martinez (Mascotas & Vida)</h4>
+                      <p class="font-weight-light mb-0">
+                        Como veterinaria, me encanta poder ofrecer a mis clientes una herramienta adicional para asegurar la seguridad de sus mascotas. Además, la plataforma me permite promocionar mis servicios.
+                      </p>
+                    </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+          
+
+
+
+
+        
+
+
+
+
+
+
+
+          
+
+        
+      <div class="container">
+        <div class="col-12 text-center">
+            <h2 class="title">Preguntas y Respuestas</h2>
+        </div>
+          
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    ¿Puedo agregar mi información de contacto en la plataforma?
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  Si, Puede agregar su información de contacto, como su número de teléfono y enlaces a sus redes sociales, en su perfil de veterinaria en la plataforma.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  ¿Puedo personalizar el codigo con el logo de mi negocio?
+                </button>
+              </h2>
+              <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  Sí, ofrecemos la opción de personalizar los codigos con el logo de su negocio para que pueda promocionar su clínica mientras ayuda a identificar a las mascotas.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                  ¿Puedo vender los codigos a través de mi clínica?
+                </button>
+              </h2>
+              <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                  Sí, ofrecemos la opción de comprar los codigos al por mayor para que pueda venderlos en su clínica y ayudar a identificar a las mascotas de sus clientes.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingfour">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefour" aria-expanded="false" aria-controls="flush-collapsefour">
+                    ¿Puedo agregar las vacunas y controles antiparasitarios en la plataforma?
+                  </button>
+                </h2>
+                <div id="flush-collapsefour" class="accordion-collapse collapse" aria-labelledby="flush-headingfour" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    Sí, puede agregar información sobre las vacunas y controles antiparasitarios que administra en la plataforma para que los dueños de mascotas puedan verificar el estado de sus mascotas.
+                  </div>
+                </div>
+            </div>
+
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingfive">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefive" aria-expanded="false" aria-controls="flush-collapsefive">
+                    ¿Hay algún costo adicional para utilizar la plataforma?
+                  </button>
+                </h2>
+                <div id="flush-collapsefive" class="accordion-collapse collapse" aria-labelledby="flush-headingfive" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    No, no hay ningún costo adicional para utilizar la plataforma. El único costo sería el de los collares personalizados si decide comprarlos al por mayor.
+                  </div>
+                </div>
+              </div>
+
+            
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingsix">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsesix" aria-expanded="false" aria-controls="flush-collapsesix">
+                    ¿Los Stickers para collares tienen un sistema de monitoreo GPS?
+                  </button>
+                </h2>
+                <div id="flush-collapsesix" class="accordion-collapse collapse" aria-labelledby="flush-headingsix" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    No, los codigos no tienen un sistema de monitoreo GPS, pero cuentan con un código QR que permite a los dueños de mascotas y a las personas encontradoras escanear y obtener información de contacto del dueño.
+                  </div>
+                </div>
+              </div>
+
+            
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingseven">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseseven" aria-expanded="false" aria-controls="flush-collapseseven">
+                    ¿Puedo agregar información sobre los baños de control de peso para las mascotas?
+                  </button>
+                </h2>
+                <div id="flush-collapseseven" class="accordion-collapse collapse" aria-labelledby="flush-headingseven" data-bs-parent="#accordionFlushExample">
+                  <div class="accordion-body">
+                    Sí, puede agregar información sobre los baños de control de peso para las mascotas en su perfil de veterinaria en la plataforma.
+                  </div>
+                </div>
+              </div>
+
+
+            
+
+
+        </div>
+
+    </div>  
+
+<br>
+
+
+
+    <section class="call-to-action bg-gradient-primary-to-secondary ">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 text-center">
+              <h2 class="title has-text-white ">¡No pierdas más tiempo!</h2>
+              <br>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card text-center custom-color-card ">
+                <div class="card-body">
+                  <i class="fas fa-clock fa-3x"></i>
+                  <h1 class="title is-5  has-text-white">Rapidez de respuesta</h1>
+                  <p class="card-text">Obtén ayuda inmediatamente a través de WhatsApp.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card text-center custom-color-card ">
+                <div class="card-body">
+                  <i class="fas fa-user fa-3x"></i>
+                  <h4 class="title is-5  has-text-white">Atención personalizada</h4>
+                  <p class="card-text">Hable con un representante especializado para obtener ayuda específica.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card text-center custom-color-card ">
+                <div class="card-body">
+                  <i class="fas fa-mobile-alt fa-3x"></i>
+                  <h4 class="title is-5  has-text-white">Comodidad</h4>
+                  <p class="card-text">Obtén ayuda desde donde sea, en cualquier momento.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 text-center mt-5">
+              
+                <a  target="_blank" href="https://api.whatsapp.com/send?phone=573209606564&text=Hola,%20%C2%A1estoy%20interesado%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20compra%20al%20por%20mayor%20de%20los%20c%C3%B3digos%20QR,%20%C2%BFPodr%C3%ADa%20proporcionarme%20m%C3%A1s%20detalles%20y%20c%C3%B3mo%20puedo%20hacer%20un%20pedido?%20Gracias." class="button is-large  is-focused is-success is-fullwidth is-rounded">
+                    <span class="icon">
+                      <i class="fab fa-whatsapp"></i>
+                    </span>
+                    <span class="is-size-6-mobile">Envíanos un mensaje al WhatsApp</span>
+                  </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+
+
+        <!-- Call to action section-->
+        <section class="cta">
+            <div class="cta-content">
+                <div class="container px-5">
+                    <h2 class="text-white display-1 lh-1 mb-4">
+                        Protege a tus Pacientes.
+                        <br />
+                        ¡Actúa ahora!
+                    </h2>
+                    <a class="btn btn-outline-light py-3 px-4 rounded-pill" href="https://api.whatsapp.com/send?phone=573209606564&text=Hola,%20%C2%A1estoy%20interesado%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20compra%20al%20por%20mayor%20de%20los%20c%C3%B3digos%20QR,%20%C2%BFPodr%C3%ADa%20proporcionarme%20m%C3%A1s%20detalles%20y%20c%C3%B3mo%20puedo%20hacer%20un%20pedido?%20Gracias." target="_blank">Saber Más</a>
+                </div>
+            </div>
+        </section>
+        <!-- App badge section-->
+
+        <!-- Footer-->
+        <footer class="bg-black text-center py-5">
+            <div class="container px-5">
+                <div class="text-white-50 small">
+                    <div class="mb-2">Codigos Para Cuidar </div>
+
+                </div>
+            </div>
+        </footer>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+
+        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    </body>
+</html>

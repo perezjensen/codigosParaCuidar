@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Datos de {{datos.nombreMascota}}</title>
+  <!--boostrap-->
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'perfilMascotas/images/icono.ico' %}">
+  <link rel="stylesheet" href="{% static 'perfilMascotas/css/bootstrap.min.css' %} ">
+  <!--modificacionesTemplate-->
+  <link rel="stylesheet" href="{% static 'perfilMascotas/css/desing.css' %} ">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.css">
+</head>
+
+<body>
+
+
+
+
+  {% load humanize %} 
+
+
+
+
+  <div class="container perfil">
+    <div class="row">
+      <div class="col-4">
+        <img  data-bs-toggle="modal" data-bs-target="#ImageModal" class="perfil-redondo" src="{{datos.imagenPerfil.url}}" alt="">
+
+      </div>
+      <div class="col-7">
+        <h1 class="nombre-perfil">Datos de {{datos.nombreMascota}}</h1>
+
+       <!-- Modal -->
+        <div class="modal fade" id="ImageModal" tabindex="-1" aria-labelledby="ImageModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="ImageModalLabel">Cambiar imagen de perfil</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+              
+
+                <form id="imageForm" action="{% url 'actualizarImagen' %}"  method="POST" enctype="multipart/form-data" novalidate>
+                  {% csrf_token %}
+                  <div class="d-grid gap-2">
+                    <label for="imageInput" class="btn btn-primary inputImagen">
+                      Subir Foto
+                  </label>
+                  </div>
+
+                <input name="{{formUpdateImagen.imagenPerfil.name}}" type="file" id="imageInput" style="display: none;">
+
+              
+                <div id="imagePreview"></div>
+                
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="uploadImageBtn">Cambiar imagen</button>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+        
+  
+      </div>
+      <div class="col-1">
+        <a  href="{% url 'perfil' id %}" type="button" class="btn-close"  aria-label="Close"></a>
+      </div>
+    </div>
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container">
+
+    
+    {% if formDatosMascota.errors %}
+
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading">No se ha podido Actualizar Los datos debido a los siguientes problemas:</h4>
+      {% for field in formDatosMascota %}
+      {% for error in field.errors %}
+      <h6>{{ forloop.counter }}  - {{ error }}</h6>
+      {% endfor %}
+      {% endfor %}
+
+      <hr>
+      <p class="mb-0">Por favor, revise la información y vuelva a intentarlo. </p>
+    </div>
+
+
+
+    {% endif %}
+
+  <form  class="formRegistro " id="formulariodatosPets" action="{% url 'actualizarDatos' %}" method="POST">
+
+{% csrf_token %}
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Nombre:</label>
+        <input name="{{formDatosMascota.nombreMascota.name}}" value="{{datos.nombreMascota}}" type="text" class="form-control" id="exampleFormControlInput1" placeholder="{{datos.nombreMascota}}"  disabled >
+      </div>
+
+
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Raza:</label>
+        <input name="{{formDatosMascota.raza.name}}" value="{% if datos.raza %}{{datos.raza}} {% else %} No Asignada {% endif %} " type="text" class="form-control" id="exampleFormControlInput1" placeholder="{% if datos.raza %}{{datos.raza}} {% else %} No Asignada {% endif %} "  disabled >
+      </div>
+
+      <div class="row">
+
+        <div class="col-6">
+
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Edad:</label>
+            <input name="{{formDatosMascota.edad.name}}" value="{% if datos.edad %} {{datos.edad}} {% else %} No Asignada {% endif %} " type="number" class="form-control" id="exampleFormControlInput1" placeholder="{% if datos.edad %}{{datos.edad}} {% else %} No Asignada {% endif %} "  disabled >
+          </div>
+
+        </div>
+
+        <div class="col-6">
+
+          <div class="mb-3">
+            <label for="exampleFormControlInput1" class="form-label">Sexo:</label>
+            <select  name="{{formDatosMascota.sexo.name}}" class="form-select form-control" aria-label="Default select example" disabled >
+              {% if datos.sexo %}
+               <option  selected>{{datos.sexo}}</option>
+               {% if datos.sexo == 'macho'  %}<option value="hembra">hembra</option>{% endif %}
+               {% if datos.sexo == 'hembra'  %}<option value="macho">macho</option>{% endif %}
+               
+              {% else %}
+              <option value="macho">macho</option>
+              <option value="hembra">hembra</option>
+              {% endif %}
+            </select>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="mb-3">
+        <label for="telefono" class="form-label">Telefono:</label>
+        <input name="{{formDatosMascota.telefono.name}}"  value=" {{datos.telefono}} " type="number" class="form-control" id="telefono" placeholder="{{datos.telefono}}"  disabled >
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Correo:</label>
+        <input name="{{formDatosMascota.correo.name}}"  value="{% if datos.correo %}{{datos.correo}} {% else %} No Asignado {% endif %} " type="email" class="form-control" id="exampleFormControlInput1" placeholder="{% if datos.correo %}{{datos.correo}} {% else %} No Asignada {% endif %} "  disabled >
+      </div>
+
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Agregar Recompensa:</label>
+        <input name="{{formDatosMascota.recompensa.name}}"  value="{% if datos.recompensa %}{{datos.recompensa|intcomma}} {% else %} No Asignada {% endif %} " type="number" class="form-control" id="exampleFormControlInput1" placeholder="{% if datos.recompensa %}{{datos.recompensa}} {% else %} No Asignada {% endif %} "  disabled >
+        <br>
+        <figcaption style="color:white;" class="blockquote-footer">
+          Si no deseas activar recompesa solo asigne el valor de 0 
+        </figcaption>
+      </div>
+
+ {% if datos.sexo  %}
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Indique si {{datos.nombreMascota}} ha sido {% if datos.sexo == 'macho' %} castrado: {% elif datos.sexo == 'hembra' %} esterilizada: {% else %} esterilizada/castrado: {% endif %}  </label>
+        <select name="{{formDatosMascota.esterilizacion.name}}" class="form-select form-control" aria-label="Default select example" disabled >
+          {% if datos.esterilizacion %}
+           <option  selected>{{datos.esterilizacion}}</option>
+
+           {% if datos.sexo == 'hembra' %}
+
+              {% if datos.esterilizacion == 'esterelizada'  %}
+                  <option value="no aplica">no aplica</option>
+             
+
+              {% elif datos.esterilizacion == 'no aplica'  %}
+              <option value="esterelizada">esterelizada</option>
+
+              {% elif datos.esterilizacion == 'castrado'  %}
+              <option value="esterelizada">esterelizada</option>
+              <option value="no aplica">no aplica</option>
+
+              {% else %}
+              <option value="no aplica">no aplica</option>
+              <option value="esterelizada">esterelizada</option>
+              {% endif %}
+             
+
+              
+            
+            {% elif datos.sexo == 'macho' %}
+              {% if datos.esterilizacion == 'castrado'  %}
+                <option value="no aplica">no aplica</option>
+              {% endif %}
+            
+            {% if datos.esterilizacion == 'no aplica'  %}
+              <option value="castrado">castrado</option>
+              {% endif %}
+
+              {% if datos.esterilizacion == 'esterelizada'  %}
+              <option value="castrado">castrado</option>
+              <option value="no aplica">no aplica</option>
+            {% endif %}
+
+            
+  
+            {% endif %} 
+           
+           
+           
+          {% else %}
+          <option selected value="no aplica">No Aplica</option>
+          <option value="esterelizada">Esterelizada</option>
+          <option value="castrado">Castrado</option>
+          
+          {% endif %}
+        </select>
+      </div>
+      {% endif %}
+
+
+      <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Observaciones Adicionales</label>
+        <textarea name="{{formDatosMascota.observaciones.name}}" class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>{{datos.observaciones}}</textarea >
+      </div>
+     
+
+        
+          <div class="d-grid gap-2">
+            <button type="button" class="btn btn-info" id="editarBoton">Habilitar</button>
+            <input type="submit" class="btn btn-info d-none guardar" id="guardarBoton" value="Guardar" display="none" >
+          </div>
+     
+
+
+
+     
+
+      <p class="lead">
+        <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+          <p class="h6">Para editar tus datos, primero debes presionar el botón "Habilitar" para activar los campos de edición. Luego, ingresa los nuevos datos y presiona el botón "Guardar" para confirmar los cambios.</p>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        
+      </p>
+
+    </form>
+
+  </div>
+
+  <br>
+
+  <div class="container informacion">
+
+
+
+    <h1> Fichas medicas de {{datos.nombreMascota}} </h1>
+    <h6>Podrás llevar un control exhaustivo de sus vacunas, baños, desparasitantes y peso. Mantener actualizadas estas
+      fichas te ayudará a garantizar la salud y bienestar de {{datos.nombreMascota}} </h6>
+    <hr>
+  </div>
+
+  <div class="container">
+    <div class="card text-center cardFichas">
+      <div class="card-header header-card-vacunas">
+
+
+        <div class="row">
+          <di class="col-8">
+            <h4 class="titulo-card">Ficha Medica Vacunas</h4>
+          </di>
+          <di class="col-4">
+            <button type="button btn-sm" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#exampleModal">Agregar</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header modalTitulos">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Vacuna</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <form action="{% url 'guardarVacunas' %}" method="POST">
+                      {% csrf_token %}
+                      <div class="mb-3 formularios">
+                        <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+                        <input name="{{form.fecha.name}}" type="date" class="form-control"
+                          id="exampleFormControlInput1">
+                      </div>
+
+                      <div class="mb-3 formularios">
+                        <label for="exampleFormControlInput1" class="form-label">Nombre Vacuna</label>
+                        <input name="{{form.vacuna.name}}" type="text" class="form-control"
+                          id="exampleFormControlInput1">
+                      </div>
+
+                      <div class="mb-3 formularios">
+                        <label for="exampleFormControlInput1" class="form-label">Dosis</label>
+                        <input name="{{form.dosis.name}}" type="text" class="form-control"
+                          id="exampleFormControlInput1">
+                      </div>
+
+                    
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+          </di>
+        </div>
+      </div>
+      <div class="card-body">
+
+
+
+
+
+        {% if form.errors %}
+
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">No se ha podido guardar la vacuna debido a los siguientes problemas:</h4>
+          {% for field in form %}
+          {% for error in field.errors %}
+          <h6>{{ error }}</h6>
+          {% endfor %}
+          {% endfor %}
+
+          <hr>
+          <p class="mb-0">Por favor, revise la información y vuelva a intentarlo. </p>
+        </div>
+
+
+
+        {% endif %}
+
+
+
+        {% if  vacunasMostrar%}
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Vacuna</th>
+              <th scope="col">Dosis</th>
+              <th scope="col"></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            {% for vacuna in vacunasMostrar.all %}
+            <tr>
+              <td scope="row">{{vacuna.fecha|date:"SHORT_DATE_FORMAT"}}</td>
+              <td>{{vacuna.vacuna}}</td>
+              <td>{{vacuna.dosis}}</td>
+              <!-- Button trigger modal -->
+              <td>
+                <button type="button" class="btn btn-circle btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal{{vacuna.id}}">
+                  Borrar
+                </button>
+
+              
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal{{vacuna.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"> ¿Quieres eliminar esta vacuna de tu registro?<br>{{vacuna.vacuna}} </h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+
+                      <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+
+                        <div class="d-grid gap-2">
+
+                            <a class="btn btn-danger" href=" {% url 'eliminarVacuna'  vacuna.id %}" > Borrar Registro </a>
+                     
+                        </div>
+
+                   
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              </td>
+
+
+            </tr>
+            {% endfor %}
+
+
+          </tbody>
+        </table>
+
+
+        {% else %}
+        <div class="alert alert-info" role="alert">
+          <p>No tienes datos agregados a tu registro. Haz clic en el botón 'Agregar' en la parte superior derecha para añadir un nuevo registro. </p>
+        </div>
+        {% endif %}
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <div class="card text-center cardFichas">
+      <div class="card-header header-card-vacunas-verdes">
+
+
+        <div class="row">
+          <di class="col-8">
+            <h4 class="titulo-card">Ficha Baños</h4>
+          </di>
+          <di class="col-4">
+            <button type="button btn-sm" class="btn btn-success" data-bs-toggle="modal"
+              data-bs-target="#exampleModalbaño">Agregar</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalbaño" tabindex="-1" aria-labelledby="exampleModalLabelbaño"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header modalTitulosverdes">
+                    <h1 class="modal-title fs-5" id="exampleModalLabelbaño">Agregar Baño</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <form action="{% url 'guardarBanos' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3 formulariosverdes">
+                      <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+                      <input name="{{formBanos.fecha.name}}" type="date" class="form-control" id="exampleFormControlInput1">
+                    </div>
+
+                    <div class="mb-3 formulariosverdes">
+                      <label for="exampleFormControlInput1" class="form-label">Descripcion</label>
+                      <input name="{{formBanos.descripcion.name}}" type="text" class="form-control" id="exampleFormControlInput1">
+                    </div>
+
+
+
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                  </div>
+                </form>
+                </div>
+              </div>
+            </div>
+
+          </di>
+        </div>
+      </div>
+      <div class="card-body">
+
+
+
+
+        {% if formBanos.errors %}
+
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">No se ha podido guardar el registro de baño debido a los siguientes problemas:</h4>
+          {% for field in formBanos %}
+          {% for error in field.errors %}
+          <h6>{{ error }}</h6>
+          {% endfor %}
+          {% endfor %}
+
+          <hr>
+          <p class="mb-0">Por favor, revise la información y vuelva a intentarlo. </p>
+        </div>
+
+
+
+        {% endif %}
+
+
+
+        {% if banosMostrar %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Descripcion</th>
+              <th scope="col"></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for banos in banosMostrar %}
+              <td >{{banos.fecha|date:"SHORT_DATE_FORMAT"}}</td>
+              <td>{{banos.descripcion}}</td>
+
+              <td>
+
+                <button type="button" class="btn btn-circle btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalbanos{{banos.id}}">
+                  Borrar
+                </button>
+
+              
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalbanos{{banos.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"> ¿Quieres eliminar a {{banos.descripcion}} de tu registro?</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+
+                      <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+
+                        <div class="d-grid gap-2">
+
+                            <a class="btn btn-danger" href=" {% url 'eliminarBano'  banos.id %}" > Borrar Registro </a>
+                     
+                        </div>
+
+                   
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              </td>
+             
+            </tr>
+            {% endfor %}
+
+
+          </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-info" role="alert">
+          <p>No tienes baños agregados a tu registro. Haz clic en el botón 'Agregar' en la parte superior derecha para añadir un nuevo registro. </p>
+        </div>
+        {% endif %}
+
+      </div>
+
+    </div>
+  </div>
+
+  <br>
+
+  <div class="container">
+    <div class="card text-center cardFichas">
+      <div class="card-header header-card-vacunas">
+
+
+        <div class="row">
+          <di class="col-8">
+            <h4 class="titulo-card">Ficha Desparasitante</h4>
+          </di>
+          <di class="col-4">
+            <button type="button btn-sm" class="btn btn-primary" data-bs-toggle="modal"
+              data-bs-target="#exampleModalparasito">Agregar</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalparasito" tabindex="-1" aria-labelledby="exampleModalLabelparasito"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header modalTitulos">
+                    <h1 class="modal-title fs-5" id="exampleModalLabelparasito">Agregar Desparasitante</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="{% url 'guardarDesparasitante' %}" method="POST">
+                      {% csrf_token %}
+                    <div class="mb-3 formularios">
+                      <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+                      <input name="{{formdesparasitante.fecha.name}}" type="date" class="form-control" id="exampleFormControlInput1">
+                    </div>
+
+                    <div class="mb-3 formularios">
+                      <label for="exampleFormControlInput1" class="form-label">Antiparasitario</label>
+                      <input name="{{formdesparasitante.antiparasitario.name}}" type="text" class="form-control" id="exampleFormControlInput1">
+                    </div>
+
+                    <div class="mb-3 formularios">
+                      <label for="exampleFormControlInput1" class="form-label">Dosis</label>
+                      <input name="{{formdesparasitante.dosis.name}}" type="text" class="form-control" id="exampleFormControlInput1">
+                    </div>
+
+
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                  </div>
+                </form>
+                </div>
+              </div>
+            </div>
+
+          </di>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-body">
+
+
+
+
+          {% if formdesparasitante.errors %}
+  
+          <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">No se ha podido guardar el registro del Antiparasitario debido a los siguientes problemas:</h4>
+            {% for field in formdesparasitante %}
+            {% for error in field.errors %}
+            <h6>{{ error }}</h6>
+            {% endfor %}
+            {% endfor %}
+  
+            <hr>
+            <p class="mb-0">Por favor, revise la información y vuelva a intentarlo. </p>
+          </div>
+  
+  
+  
+          {% endif %}
+  
+  
+  
+          {% if desparasitanteMostrar %}
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Antiparasitario</th>
+                <th scope="col">Dosis</th>
+                <th scope="col"></th>
+  
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {% for desparasitante in desparasitanteMostrar %}
+                <td >{{desparasitante.fecha|date:"SHORT_DATE_FORMAT"}}</td>
+                <td>{{desparasitante.antiparasitario}}</td>
+                <td>{{desparasitante.dosis}}</td>
+                <td>
+  
+                  <button type="button" class="btn btn-circle btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModaldesparasitante{{desparasitante.id}}">
+                    Borrar
+                  </button>
+  
+                
+  
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModaldesparasitante{{desparasitante.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel"> ¿Quieres eliminar a {{desparasitante.antiparasitario}} de tu registro?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-footer">
+  
+                        <div class="d-grid gap-2">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                          </div>
+  
+                          <div class="d-grid gap-2">
+  
+                              <a class="btn btn-danger" href=" {% url 'eliminarDesparasitante'  desparasitante.id %}" > Borrar Registro </a>
+                       
+                          </div>
+  
+                     
+  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+  
+                </td>
+               
+              </tr>
+              {% endfor %}
+  
+  
+            </tbody>
+          </table>
+          {% else %}
+          <div class="alert alert-info" role="alert">
+            <p>No tienes datos agregados a tu registro. Haz clic en el botón 'Agregar' en la parte superior derecha para añadir un nuevo registro. </p>
+          </div>
+          {% endif %}
+  
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+  <br>
+  <div class="container">
+    <div class="card text-center cardFichas">
+      <div class="card-header header-card-vacunas-verdes">
+
+
+        <div class="row">
+          <di class="col-8">
+            <h4 class="titulo-card">Control de Peso </h4>
+          </di>
+          <di class="col-4">
+            <button type="button btn-sm" class="btn btn-success" data-bs-toggle="modal"
+              data-bs-target="#exampleModalpeso">Agregar</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalpeso" tabindex="-1" aria-labelledby="exampleModalLabelpeso"
+              aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header modalTitulosverdes">
+                    <h1 class="modal-title fs-5" id="exampleModalLabelparasito">Agregar nuevo registro de peso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                     <form action="{% url 'guardarPeso' %}" method="POST">
+                      {% csrf_token %}
+                    <div class="mb-3 formulariosverdes">
+                      <label for="exampleFormControlInput1" class="form-label">Fecha</label>
+                      <input name="{{formPeso.fecha.name}}" type="date" class="form-control" id="exampleFormControlInput1"
+                        >
+                    </div>
+
+                    <div class="mb-3 formulariosverdes">
+                      <label for="exampleFormControlInput1" class="form-label">peso</label>
+                      <input name="{{formPeso.peso.name}}"type="number" class="form-control" id="exampleFormControlInput1">
+                    </div>
+
+
+
+
+
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                  </div>
+                </form>
+                </div>
+              </div>
+            </div>
+
+          </di>
+        </div>
+      </div>
+      <div class="card-body">
+
+
+
+
+        {% if formPeso.errors %}
+
+        <div class="alert alert-danger" role="alert">
+          <h4 class="alert-heading">No se ha podido guardar el registro de peso debido a los siguientes problemas:</h4>
+          {% for field in formPeso %}
+          {% for error in field.errors %}
+          <h6>{{ error }}</h6>
+          {% endfor %}
+          {% endfor %}
+
+          <hr>
+          <p class="mb-0">Por favor, revise la información y vuelva a intentarlo. </p>
+        </div>
+
+
+
+        {% endif %}
+
+
+
+        {% if pesoMostrar %}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Fecha</th>
+              <th scope="col">Peso</th>
+              <th scope="col"></th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% for peso in pesoMostrar %}
+              <td >{{peso.fecha|date:"SHORT_DATE_FORMAT"}}</td>
+              <td>{{peso.peso}}</td>
+
+              <td>
+
+                <button type="button" class="btn btn-circle btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModalpeso{{peso.id}}">
+                  Borrar
+                </button>
+
+              
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalpeso{{peso.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel"> ¿Quieres eliminar a {{peso.peso}} de tu registro?</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-footer">
+
+                      <div class="d-grid gap-2">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+
+                        <div class="d-grid gap-2">
+
+                            <a class="btn btn-danger" href=" {% url 'eliminarPeso'  peso.id %}" > Borrar Registro </a>
+                     
+                        </div>
+
+                   
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              </td>
+             
+            </tr>
+            {% endfor %}
+
+
+          </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-info" role="alert">
+          <p>No tienes registros agregados. Haz clic en el botón 'Agregar' en la parte superior derecha para añadir un nuevo registro. </p>
+        </div>
+        {% endif %}
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <br>
+
+
+
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- JavaScript Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+    </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.0/dist/sweetalert2.min.js"></script>
+  
+
+
+  <script>
+
+
+
+
+    // Obtiene el botón "Editar" y el botón "Guardar"
+    const botonEditar = document.querySelector(".btn-info");
+    const botonGuardar = document.querySelector(".guardar");
+
+    // Deshabilita el botón "Guardar"
+    botonGuardar.disabled = true;
+
+    // Añade un evento click al botón "Editar"
+    botonEditar.addEventListener("click", function () {
+      // Habilita todos los inputs
+      const inputs = document.querySelectorAll("input");
+      inputs.forEach(input => input.disabled = false);
+      const select = document.querySelectorAll("select");
+      select.forEach(select => select.disabled = false);
+      const textarea = document.querySelectorAll("textarea");
+      textarea.forEach(textarea => textarea.disabled = false);
+
+      // Habilita el botón "Guardar"
+      botonGuardar.disabled = false;
+      // Oculta el botón "Editar"
+      botonEditar.style.display = "none";
+      // Muestra el botón "Guardar"
+      botonGuardar.classList.toggle("d-none")
+    });
+
+
+
+  </script>
+
+
+  <script>
+    // Seleccionar input de imagen
+    const imageInput = document.getElementById('imageInput');
+    // Seleccionar div de vista previa de imagen
+    const imagePreview = document.getElementById('imagePreview');
+  
+    // Mostrar vista previa de imagen al seleccionar un archivo
+    imageInput.addEventListener('change', function() {
+      // Obtener archivo seleccionado
+      const file = this.files[0];
+      // Crear un FileReader para leer el archivo
+      const reader = new FileReader();
+      // Mostrar vista previa de imagen al cargar el archivo
+      reader.addEventListener('load', function() {
+        imagePreview.innerHTML = `<img src="${this.result}" class="img-fluid">`;
+      });
+      // Leer archivo
+      reader.readAsDataURL(file);
+    });
+  
+    // Seleccionar botón de cambiar imagen
+    const uploadImageBtn = document.getElementById('uploadImageBtn');
+  
+
+  </script>
+  
+
+</body>
+
+</html>

@@ -1,0 +1,203 @@
+:root {
+  --color-desing-primary: #0089E4;
+  --color-desing-secondary: #1FBA8E;
+  
+}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap');
+body{
+  background-color: var(--color-desing-primary);
+}
+
+.navHeader {
+  background-color: var(--color-desing-secondary);
+  
+
+}
+
+.navHeader img{
+  padding: 20px;
+}
+
+.bodyContent{
+margin-top: 20px;
+color: white;
+font-family: 'Roboto', sans-serif;
+}
+.bodyText{
+align-items: center;
+justify-content: center;
+}
+.formRegistro{
+color: white;
+
+
+}
+
+.formRegistro label{
+margin-bottom: -20px;
+margin-top: 5px;
+font-family: 'Roboto-lihgt', sans-serif;
+
+}
+
+
+.inputImagen{
+border: white solid 4px;
+border-radius: 20px;
+
+}
+.inputImagen h4{
+margin-top: 5px;
+}
+.inputImagen img{
+margin-top: 10px;
+}
+.qractive{
+background-color: var(--color-desing-secondary)!important;
+}
+.containerBotones{
+display: flex;
+justify-content: center;
+align-content: center;
+margin-top: 5px;
+}
+
+.onda{
+margin-top: -20px;
+}
+
+.titleEncontrado{
+color: white;
+font-family: 'Roboto', sans-serif;
+padding: 10px;
+text-align: center;
+}
+.nameMascota{
+margin-top: -10px;
+font-size: 2.7em;
+}
+.mensaje{
+font-size: 1.3em;
+}
+
+.imgPerfil{
+width: 100%;
+}
+
+.instruciones{
+color: white;
+text-align: center;
+}
+.wpbtn{
+background-color: white!important;
+color: var(--color-desing-secondary)!important;
+font-family: 'Roboto', sans-serif;
+font-size: 1.7em;
+margin-top: 10px;
+}
+
+.tlfbtn{
+background-color: white!important;
+color: var(--color-desing-primary)!important;
+font-family: 'Roboto', sans-serif;
+font-size: 1.7em;
+
+}
+.footerIifo{
+margin-top: 20px;
+color: white;
+text-align: center;
+padding:5px;
+background-color: var(--color-desing-secondary);
+}
+
+.botonEditar{
+background-color: var(--color-desing-primary);
+color: white;
+font-family: 'Roboto', sans-serif;
+font-size: 1.3em;
+}
+
+.perfil-redondo{
+border-radius: 50%;
+width: 80px;
+height: 80px;
+border: solid 6px #2FA9FB;
+position: relative;  /* Añade esta línea */
+}
+.perfil{
+margin-top: 20px;
+;
+}
+.nombre-perfil{
+margin-top: 20px;
+color: white;
+font-family: 'Roboto', sans-serif;
+font-size: 1.7em;
+
+}
+
+.botonEditarverde{
+background-color: var(--color-desing-secondary);
+color: white;
+font-family: 'Roboto', sans-serif;
+font-size: 1.3em;
+}
+
+.botonEditarverde:active {
+background-color: var(--color-desing-secondary)!important;
+color: white!important;
+outline: none;
+}
+.botonEditarverde:focus{
+background-color: var(--color-desing-secondary)!important;
+color: white!important;
+}
+
+.header-card-vacunas{
+background-color: #57bbfd;
+color: white;
+
+}
+.header-card-vacunas-verdes{
+background-color: #3edaad;
+color: white;
+
+}
+.cardFichas{
+border: none;
+font-family: 'Roboto', sans-serif;
+}
+.titulo-card{
+margin-top: 5px;
+}
+
+.modalTitulos{
+background-color: #57bbfd ;
+font-family: 'Roboto', sans-serif;
+}
+.modal{
+border: none!important;
+}
+
+.formularios{
+color: var(--color-desing-primary);
+text-align: left;
+}
+.modalTitulosverdes{
+background-color: #3edaad ;
+font-family: 'Roboto', sans-serif;
+}
+.formulariosverdes{
+color: var(--color-desing-secondary);
+text-align: left;
+}
+
+.informacion{
+color: white;
+text-align: center;
+font-family: 'Roboto', sans-serif;
+
+
+}
+

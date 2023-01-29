@@ -1,0 +1,19 @@
+
+body{
+    background-color:white!important;
+  }
+
+.contenido{
+    border-radius: 30px;
+     background-color: white;
+     margin-top: -40px;
+     z-index: 5!important;
+     position: absolute;
+   }
+.imagencontenido{
+     z-index: 1;
+   }
+.linea{
+    height: 20px;
+    background-color: white;
+    }
